@@ -2,14 +2,16 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 import Alert from "../components/Alert";
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
-  const { url } = useAuth(); // Get the URL from context
+  const { login, url } = useAuth(); // Get the URL from context
   const [loginIdentifier, setLoginIdentifier] = useState("");
   const [password, setPassword] = useState("");
   const [message, setMessage] = useState("");
   const [showAlert, setShowAlert] = useState(false);
   const [alertType, setAlertType] = useState("");
+  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -26,11 +28,14 @@ const Login = () => {
       const data = await response.json();
       if (response.ok) {
         // Store the token in localStorage
-        localStorage.setItem("token", data.token);
+        // localStorage.setItem("token", data.token);
+        login(data.token);
         setMessage("Login successful!"); // Success message
         setShowAlert(true);
         setAlertType("success");
+        navigate("/home");
         console.log(data.message);
+        // console.log(data);
       } else {
         setMessage(data.message || "Login failed"); // Error message
         console.log(data.message);
@@ -50,16 +55,18 @@ const Login = () => {
 
   return (
     <div
-      className="flex flex-col items-center justify-center min-h-screen text-white font-spotify"
-      style={{ backgroundColor: "rgba(0, 0, 0, 0.95)" }}
+      className="flex flex-col items-center justify-center min-h-screen text-white font-spotify "
+      style={{
+        background: "	#202020",
+      }}
     >
       {showAlert && (
         <Alert message={message} onClose={handleCloseAlert} type={alertType} />
       )}{" "}
       {/* Render the alert */}
       <div
-        className="w-full max-w-md p-8 space-y-6  rounded-lg shadow-lg bg-black "
-        // style={{ backgroundColor: "rgba(0, 0, 0, 0.95)" }}
+        className="w-full max-w-md p-8 space-y-6  rounded-lg shadow-lg  "
+        style={{ background: "#121212" }}
       >
         <div className="flex justify-center mb-6">
           <img
@@ -73,7 +80,10 @@ const Login = () => {
         </h2>
         {/* Social Login Options */}
         <div className="flex flex-col space-y-4">
-          <button className="flex items-center justify-center w-full py-2 text-center border-white border-2 text-white bg-black rounded-full">
+          <button
+            className="flex items-center justify-center w-full py-2 text-center border-white border-2 text-white rounded-full"
+            style={{ background: "#121212" }}
+          >
             <img
               src="https://cdn-icons-png.flaticon.com/512/2991/2991148.png" // Google logo from flaticon
               alt="Google Logo"
@@ -99,7 +109,8 @@ const Login = () => {
               type="text"
               value={loginIdentifier}
               onChange={(e) => setLoginIdentifier(e.target.value)}
-              className="w-full px-4 py-2 mt-1 text-white bg-black border-2 border-white rounded-full focus:ring-2 focus:ring-white focus:outline-none"
+              className="w-full px-4 py-2 mt-1 text-white border-2 border-white rounded-full focus:ring-2 focus:ring-white focus:outline-none"
+              style={{ background: "#121212" }}
               required
             />
           </div>
@@ -109,7 +120,8 @@ const Login = () => {
               type="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              className="w-full px-4 py-2 mt-1 text-white bg-black border-2 border-white rounded-full focus:ring-2 focus:ring-white focus:outline-none"
+              className="w-full px-4 py-2 mt-1 text-white border-2 border-white rounded-full focus:ring-2 focus:ring-white focus:outline-none "
+              style={{ background: "#121212" }}
               required
             />
           </div>

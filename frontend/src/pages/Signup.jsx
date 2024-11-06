@@ -53,7 +53,11 @@ const Signup = () => {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen bg-black text-white font-spotify">
+    <div
+      className="flex flex-col items-center justify-center min-h-screen text-white font-spotify
+    "
+      style={{ background: "#121212" }}
+    >
       {showAlert && (
         <Alert message={message} onClose={handleCloseAlert} type={alertType} />
       )}{" "}
@@ -70,7 +74,10 @@ const Signup = () => {
       </h2>
       {/* Social Signup Options*/}
       <div className="flex flex-col space-y-4 mb-6 w-full max-w-md">
-        <button className="flex items-center justify-center w-full py-2 text-center text-white bg-black border-white border-2 rounded-full">
+        <button
+          className="flex items-center justify-center w-full py-2 text-center text-white border-white border-2 rounded-full"
+          style={{ background: "#121212" }}
+        >
           <img
             src="https://cdn-icons-png.flaticon.com/512/2991/2991148.png" // Google logo from flaticon
             alt="Google Logo"
@@ -94,7 +101,8 @@ const Signup = () => {
             type="email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            className="w-full px-4 py-2 mt-1 text-white bg-black boder-white border-2 rounded-full focus:ring-2 focus:ring-white focus:outline-none"
+            className="w-full px-4 py-2 mt-1 text-white boder-white border-2 rounded-full focus:ring-2 focus:ring-white focus:outline-none"
+            style={{ background: "#121212" }}
             required
           />
         </div>
@@ -104,7 +112,8 @@ const Signup = () => {
             type="name"
             value={username}
             onChange={(e) => setUsername(e.target.value)}
-            className="w-full px-4 py-2 mt-1 text-white bg-black boder-white border-2 rounded-full focus:ring-2 focus:ring-white focus:outline-none"
+            className="w-full px-4 py-2 mt-1 text-white boder-white border-2 rounded-full focus:ring-2 focus:ring-white focus:outline-none"
+            style={{ background: "#121212" }}
             required
           />
         </div>
@@ -114,7 +123,8 @@ const Signup = () => {
             type="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
-            className="w-full px-4 py-2 mt-1 text-white bg-black boder-white border-2 rounded-full focus:ring-2 focus:ring-white focus:outline-none"
+            className="w-full px-4 py-2 mt-1 text-white boder-white border-2 rounded-full focus:ring-2 focus:ring-white focus:outline-none"
+            style={{ background: "#121212" }}
             required
           />
         </div>

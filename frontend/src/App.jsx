@@ -1,7 +1,8 @@
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
-import Home from "./pages/Home";
+import ProtectedRoute from "./components/ProtectedRoute";
+import Home from "./pages/Home/Home";
 
 const AppRouter = () => {
   return (
@@ -9,7 +10,16 @@ const AppRouter = () => {
       <Routes>
         <Route path="/signup" element={<Signup />} />
         <Route path="/" element={<Login />} />
-        <Route path="/home" element={<Home />} />
+        {/* Protected the home route */}
+        <Route
+          path="/home"
+          element={
+            <ProtectedRoute>
+              <Home />
+            </ProtectedRoute>
+          }
+        />
+        {/* You can add other routes here */}
       </Routes>
     </Router>
   );

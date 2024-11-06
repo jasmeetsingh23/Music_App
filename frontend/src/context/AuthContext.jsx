@@ -7,12 +7,14 @@ const AuthContext = createContext();
 export const AuthProvider = ({ children }) => {
   const [token, setToken] = useState(null);
   const [url, setUrl] = useState("");
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
 
   useEffect(() => {
     // Retrieve the token from localStorage
     const storedToken = localStorage.getItem("token");
     if (storedToken) {
       setToken(storedToken);
+      setIsAuthenticated(true);
     }
 
     // Construct the URL string
@@ -20,8 +22,23 @@ export const AuthProvider = ({ children }) => {
     setUrl(constructedUrl);
   }, []);
 
+  // Function to log in and set user
+  const login = (newToken) => {
+    localStorage.setItem("token", newToken);
+    setToken(newToken);
+    setIsAuthenticated(true);
+  };
+
+  const logout = () => {
+    localStorage.removeItem("token");
+    setToken(null);
+    setIsAuthenticated(false);
+  };
+
   return (
-    <AuthContext.Provider value={{ token, url }}>
+    <AuthContext.Provider
+      value={{ token, url, isAuthenticated, login, logout }}
+    >
       {children}
     </AuthContext.Provider>
   );
